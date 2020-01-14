@@ -1,0 +1,18 @@
+version: "3.6"
+
+services:
+  curriculum:
+    build:
+      context: "."
+      dockerfile: "./curriculum/Dockerfile"
+
+  graphql:
+    build:
+      context: "."
+      dockerfile: "./graphql/Dockerfile"
+    ports:
+      - "8000:8080"
+    depends_on:
+      - "curriculum"
+    environment:
+      CURRICULUM_SERVICE_URL: "curriculum:8080"
